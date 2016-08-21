@@ -1,0 +1,12 @@
+<h1>Sorter#sort</h1>
+<p>Find me in app/views/sorter/sort.html.erb</p>
+
+
+<%= form_tag("/result", method: "get") do %>
+  <%= label_tag("Input Array (comma separated values only):") %>
+  <%= text_field_tag(:list) %>
+
+  <%= radio_button_tag 'sorter', 'Merge Sort' %> <%= label_tag("Merge Sort") %>
+  <%= radio_button_tag 'sorter', 'Quick Sort'%> <%= label_tag("Quick Sort") %>
+  <%= submit_tag("Sort!") %>
+<% end %>
