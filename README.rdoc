@@ -1,28 +1,36 @@
-== README
+== Sorter App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+What does this app do?
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Takes 2 inputs (a list and a sorting algorithm) and sorts the list according to the algorithm!
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== The View
+
+* The <tt>app/view/sorter/sort.html.erb</tt> has a sort button. It calls <tt>GET /result</tt>, passes two fields through params: :list, and :sorting_algorithm.
+
+* The <tt>app/view/sorter/result.html.erb</tt> displays the sorted list and the algorithm used to sort.
+
+== The Controller
+
+* The controller <tt>app/controllers/sorter_controller</tt> has the <tt>result</tt> action called when sort button is clicked.
+
+* The flash messages are filled if the parameters are missing or wrong and it redirects back to previous page. Else it continues to sort.
+
+* It splits the list string into an array by a comma (,) (integer list or string list, doesn't matter)
+
+== The SortService Class
+
+* Has <tt>sort()</tt> function, it takes two parameters: list and algorithm.
+
+* It selects <tt>mergesort()</tt> or <tt>quicksort()</tt> according to algorithm parameter passed.
+ 
+
+== The Tests
+
+* Used rspec to test the controllers and classes. Tests are in the folder <tt>spec/</tt>
+
+* <tt>spec/sorter_controller_spec.rb</tt> has tests for the actions defined in Sort_Controller. Actions are called with different parameters.
+
+* <tt>spec/sort_service_spec.rb</tt> has tests for sort algorithms. All algorithms are called with various parameters. Integer lists, String lists, invalid lists.
+
