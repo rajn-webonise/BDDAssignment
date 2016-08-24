@@ -2,36 +2,26 @@ require "rails_helper"
 
 
 RSpec.describe ApplicationController do
-=begin
-  describe "Sort Algorithms Check For Integer Lists" do
 
-    before(:each) do
-      @a = [5, 32, 5, -1, 43, 2, -1, 32, 5]
-    end
-
-    it 'checks if merge_sort works on integers list' do
-      expect(@controller.mergesort(@a)==@a.sort).to eq(true)
-    end
-
-    it 'checks if quick_sort works on integers list' do
-      expect(@controller.quicksort(@a)==@a.sort).to eq(true)
-    end
+  it 'checks if trim() removes .0 from decimal numbers' do
+    expect(@controller.trim(1.00)==1).to eq(true)
+    expect(@controller.trim(0.10)==0.1).to eq(true)
   end
 
-  describe "Sort Algorithms Check For String Lists" do
+  describe "Checks if a string list can be an integer list" do
 
-    before(:each) do
-      @a = ["a", "aaa", "baa", "caaaa", "xyz", "bb", "cab"]
+    it "checks for list with integer numbers" do
+      expect(@controller.is_list_integer('1,32,54')).to eq true
     end
 
-    it 'checks if merge_sort works on string list' do
-      expect(@controller.mergesort(@a)==@a.sort).to eq(true)
+    it "checks for list with decimal numbers" do
+      expect(@controller.is_list_integer('1,32,54.66,0.0001, 328.2')).to eq true
     end
 
-    it 'checks if quick_sort works on string list' do
-      expect(@controller.quicksort(@a)==@a.sort).to eq(true)
+    it "checks for list with strings (with numbers as well) -> Shouldn't be a integer list" do
+      expect(@controller.is_list_integer('aa, fea, abc, xyz, wait, 101')).to eq false
     end
 
   end
-=end
+
 end

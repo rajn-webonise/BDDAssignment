@@ -1,15 +1,8 @@
 
 class SortService
-    def initialize
-    end
-
-    def sort(list, algorithm)
-      if algorithm=='Merge Sort'
-        sorted_list = mergesort(list)
-      elsif algorithm == 'Quick Sort'
-        sorted_list = quicksort(list)
-      end
-      return sorted_list
+    def initialize(list, algorithm)
+      @list = list
+      @algorithm = algorithm
     end
 
     def mergesort(list)
@@ -29,13 +22,11 @@ class SortService
         else
           sorted << right.shift
         end
-
       end
       sorted.concat(left).concat(right)
     end
 
     def quicksort(list)
-
       clist = list.clone
       return qsort(clist)
     end
@@ -61,5 +52,16 @@ class SortService
       return quicksort(lesser) + [pivot_value] + quicksort(greater)
     end
 
+    def sort
+      sorted_list = []
+      if @algorithm=='Merge Sort'
+        sorted_list = mergesort(@list)
+      elsif @algorithm == 'Quick Sort'
+        sorted_list = quicksort(@list)
+      else
+        return 'Invalid input'
+      return sorted_list
+    end
 
+  end
 end

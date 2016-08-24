@@ -19,14 +19,20 @@ RSpec.describe SorterController, type: :controller do
     end
   end
 
-  describe 'Redirect wrong inputs to #sort' do
+  describe 'Redirect missing inputs back to #sort action' do
+
     it 'redirects when no input array passed' do
       get :result, {sorting_algorithm: 'Merge Sort'}
       expect(response).to  redirect_to('/')
     end
+    it 'redirects when no sorting algorithm passed' do
+      get :result, {list: '6, 1, 2, 3, 5, 4.001'}
+      expect(response).to  redirect_to('/')
+    end
+    it 'redirects when neither values have been passed' do
+      get :result, {}
+      expect(response).to  redirect_to('/')
+    end
   end
-
-
-
 
 end

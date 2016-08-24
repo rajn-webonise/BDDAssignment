@@ -1,4 +1,4 @@
-require 'SortService.rb'
+require Rails.root.to_s+'/lib/SortService.rb'
 
 class SorterController < ApplicationController
 
@@ -15,20 +15,19 @@ class SorterController < ApplicationController
       return
     end
 
-    if(is_i params["list"].split(",")[0])
-      @list = params["list"].split(",").map(&:to_i)
+    integer_list_check = is_list_integer(params['list'])
+
+
+    if(integer_list_check)
+      @list = params["list"].split(",").map{|x| x = trim(x.to_f) }
     else
-      @list = params["list"].split(", ")
+      @list = params["list"].split(",")
     end
 
     @sorting_algorithm = params[:sorting_algorithm]
 
-    sort_service = SortService.new
-
-    @sorted_list = sort_service.sort(@list, @sorting_algorithm)
-
-
+    sort_service = SortService.new(@list, @sorting_algorithm)
+    @sorted_list = sort_service.sort()
   end
 
-  
 end
